@@ -32,4 +32,9 @@ define module tracing-core
 
   export enable-tracing,
          disable-tracing;
+
+  export <span-writer>,
+         write-span,
+         add-span-writer,
+         store-span;
 end module tracing-core;

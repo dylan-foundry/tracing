@@ -6,3 +6,4 @@ files: library
        timeline-annotation
        timestamp
        unique-id
+       span-writer
