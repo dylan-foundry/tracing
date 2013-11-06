@@ -4,8 +4,8 @@ Author: Bruce Mitchener, Jr.
 Copyright: See LICENSE file in this distribution.
 
 define class <timeline-annotation> (<object>)
-  constant slot description :: <string>,
+  constant slot annotation-description :: <string>,
     required-init-keyword: description:;
-  constant slot timestamp :: <timestamp>,
+  constant slot annotation-timestamp :: <timestamp>,
     required-init-keyword: timestamp:;
 end class <timeline-annotation>;

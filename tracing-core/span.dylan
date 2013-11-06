@@ -4,9 +4,9 @@ author: Bruce Mitchener, Jr.
 copyright: See LICENSE file in this distribution.
 
 define class <span> (<object>)
-  constant slot parent-id :: false-or(<unique-id>) = #f,
+  constant slot span-parent-id :: false-or(<unique-id>) = #f,
     init-keyword: parent-id:;
-  constant slot description :: <string>,
+  constant slot span-description :: <string>,
     required-init-keyword: description:;
   slot timeline-annotations :: limited(<vector>, of: <timeline-annotation>);
   constant slot span-start-time :: <timestamp> = timestamp-now();
