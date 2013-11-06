@@ -12,7 +12,17 @@ define module tracing-core
   use dylan;
   use common-dylan;
 
-  export <span>, annotate-span;
+  export <span>,
+         span-parent-id,
+         span-description,
+         annotate-span,
+         stop-span,
+         span-accumulated-time,
+         span-stopped?;
+
+  export <timeline-annotation>,
+         annotation-description,
+         annotation-timestamp;
 
   export $always-sampler,
          $never-sampler,
