@@ -3,13 +3,13 @@ Synopsis: Samplers let you control how many traces are actually recorded.
 Author: Bruce Mitchener, Jr.
 Copyright: See LICENSE file in this distribution.
 
-define constant $always-sampler = always(#t);
+define constant $always-sample = always(#t);
 
-define constant $never-sampler = always(#f);
+define constant $never-sample = always(#f);
 
 define variable *tracing-enabled* = #t;
 
-define constant $if-tracing-sampler = method () => (well? :: <boolean>) *tracing-enabled* end;
+define constant $if-tracing-sample = method () => (well? :: <boolean>) *tracing-enabled* end;
 
 define function enable-tracing ()
   *tracing-enabled* := #t;
