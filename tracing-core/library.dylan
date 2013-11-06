@@ -13,6 +13,8 @@ define module tracing-core
   use common-dylan;
 
   export <span>,
+         span-id,
+         span-trace-id,
          span-parent-id,
          span-description,
          annotate-span,

@@ -4,6 +4,9 @@ author: Bruce Mitchener, Jr.
 copyright: See LICENSE file in this distribution.
 
 define class <span> (<object>)
+  constant slot span-id :: <unique-id> = get-unique-id();
+  constant slot span-trace-id :: <unique-id>,
+    required-init-keyword: trace-id:;
   constant slot span-parent-id :: false-or(<unique-id>) = #f,
     init-keyword: parent-id:;
   constant slot span-description :: <string>,
