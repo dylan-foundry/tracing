@@ -21,3 +21,11 @@ define function store-span (span :: <span>) => ()
     write-span(span, span-writer);
   end for;
 end function;
+
+define class <memory-span-writer> (<span-writer>)
+  slot span-storage :: <stretchy-vector> = #[];
+end class <memory-span-writer>;
+
+define method write-span (span :: <span>, span-writer :: <memory-span-writer>) => ()
+  span-writer.span-storage := add!(span-writer.span-storage, span);
+end method;
