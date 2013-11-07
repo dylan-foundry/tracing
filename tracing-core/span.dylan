@@ -39,7 +39,7 @@ define method span-stopped? (span :: <span>) => (well? :: <boolean>);
 end method span-stopped?;
 
 
-define method span-accumulated-time (span :: <span>)
+define method span-accumulated-time (span :: <span>) => (time? :: false-or(<duration>))
   if (span.span-stopped?)
     span.span-stop-time - span.span-start-time
   end if
