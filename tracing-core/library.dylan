@@ -43,4 +43,6 @@ define module tracing-core
          add-span-writer,
          store-span,
          <memory-span-writer>;
+
+  export get-unique-id;
 end module tracing-core;
