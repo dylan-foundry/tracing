@@ -17,8 +17,8 @@ define module tracing-core
          span-trace-id,
          span-parent-id,
          span-description,
-         annotate-span,
-         stop-span,
+         span-annotate,
+         span-stop,
          span-accumulated-time,
          span-stopped?;
 
@@ -34,7 +34,7 @@ define module tracing-core
          disable-tracing;
 
   export <span-writer>,
-         write-span,
+         span-writer-add-span,
          add-span-writer,
          store-span;
 end module tracing-core;

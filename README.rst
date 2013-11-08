@@ -31,8 +31,8 @@ Storage
 
 Spans are written to storage, represented by ``<span-writer>``.
 To add a new storage, subclass ``<span-writer>`` and implement
-the ``write-span`` method. Then, call ``add-span-writer`` with
-an instance of your span writer and all subsequent spans
+the ``span-writer-add-span`` method. Then, call ``add-span-writer``
+with an instance of your span writer and all subsequent spans
 completed will be written to it.
 
 In the future, we will provide a span writer for connecting

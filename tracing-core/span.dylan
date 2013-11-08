@@ -19,7 +19,7 @@ define class <span> (<object>)
   slot span-stop-time :: <timestamp> = 0;
 end class <span>;
 
-define method annotate-span (span :: <span>, description :: <string>)
+define method span-annotate (span :: <span>, description :: <string>)
   let annotation = make(<timeline-annotation>,
                         description: description,
                         timestamp: timestamp-now());
@@ -27,12 +27,12 @@ define method annotate-span (span :: <span>, description :: <string>)
     span.timeline-annotations := make(<timeline-annotation-vector>);
   end if;
   span.timeline-annotations := add(span.timeline-annotations, annotation);
-end;
+end method span-annotate;
 
-define method stop-span (span :: <span>)
+define method span-stop (span :: <span>)
   span.span-stop-time := timestamp-now();
   store-span(span);
-end method stop-span;
+end method span-stop;
 
 define method span-stopped? (span :: <span>) => (well? :: <boolean>);
   span.span-stop-time ~= 0
