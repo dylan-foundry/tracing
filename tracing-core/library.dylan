@@ -17,12 +17,13 @@ define module tracing-core
          span-trace-id,
          span-parent-id,
          span-description,
+         span-annotations,
          span-annotate,
          span-stop,
          span-accumulated-time,
          span-stopped?;
 
-  export <timeline-annotation>,
+  export <span-annotation>,
          annotation-description,
          annotation-timestamp;
 

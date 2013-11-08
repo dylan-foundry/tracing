@@ -3,7 +3,7 @@ target-type: dll
 files: library
        samplers
        span
-       timeline-annotation
+       span-annotation
        timestamp
        unique-id
        span-writer

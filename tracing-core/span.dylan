@@ -3,8 +3,8 @@ synopsis: span functionality, basis of a trace tree.
 author: Bruce Mitchener, Jr.
 copyright: See LICENSE file in this distribution.
 
-define constant <timeline-annotation-vector> =
-  limited(<vector>, of: <timeline-annotation>);
+define constant <span-annotation-vector> =
+  limited(<vector>, of: <span-annotation>);
 
 define class <span> (<object>)
   constant slot span-id :: <unique-id> = get-unique-id();
@@ -14,19 +14,19 @@ define class <span> (<object>)
     init-keyword: parent-id:;
   constant slot span-description :: <string>,
     required-init-keyword: description:;
-  slot timeline-annotations :: false-or(<timeline-annotation-vector>) = #f;
+  slot span-annotations :: false-or(<span-annotation-vector>) = #f;
   constant slot span-start-time :: <timestamp> = timestamp-now();
   slot span-stop-time :: <timestamp> = 0;
 end class <span>;
 
 define method span-annotate (span :: <span>, description :: <string>)
-  let annotation = make(<timeline-annotation>,
+  let annotation = make(<span-annotation>,
                         description: description,
                         timestamp: timestamp-now());
-  if (~span.timeline-annotations)
-    span.timeline-annotations := make(<timeline-annotation-vector>);
+  if (~span.span-annotations)
+    span.span-annotations := make(<span-annotation-vector>);
   end if;
-  span.timeline-annotations := add(span.timeline-annotations, annotation);
+  span.span-annotations := add(span.span-annotations, annotation);
 end method span-annotate;
 
 define method span-stop (span :: <span>)
