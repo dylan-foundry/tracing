@@ -4,6 +4,7 @@ copyright: See LICENSE file in this distribution.
 
 define library tracing-core
   use common-dylan;
+  use collections;
 
   export tracing-core;
 end library tracing-core;
@@ -11,6 +12,7 @@ end library tracing-core;
 define module tracing-core
   use dylan;
   use common-dylan;
+  use plists;
 
   export <span>,
          span-id,
@@ -19,6 +21,8 @@ define module tracing-core
          span-description,
          span-annotations,
          span-annotate,
+         span-data,
+         span-add-data,
          span-stop,
          span-accumulated-time,
          span-stopped?;

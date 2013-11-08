@@ -15,6 +15,7 @@ define class <span> (<object>)
   constant slot span-description :: <string>,
     required-init-keyword: description:;
   slot span-annotations :: false-or(<span-annotation-vector>) = #f;
+  slot span-data :: false-or(<vector>) = #f;
   constant slot span-start-time :: <timestamp> = timestamp-now();
   slot span-stop-time :: <timestamp> = 0;
 end class <span>;
@@ -28,6 +29,14 @@ define method span-annotate (span :: <span>, description :: <string>)
   end if;
   span.span-annotations := add(span.span-annotations, annotation);
 end method span-annotate;
+
+define method span-add-data (span :: <span>, key :: <string>, data :: <string>) => ();
+  if (~span.span-data)
+    span.span-data := make(<stretchy-vector>);
+  end if;
+  put-property!(span.span-data, key, data);
+end method span-add-data;
+
 
 define method span-stop (span :: <span>)
   span.span-stop-time := timestamp-now();
