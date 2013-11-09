@@ -8,6 +8,9 @@ define suite tracing-core-test-suite ()
   test test-span-data;
   test test-span-stopped;
   test test-span-accumulated-time;
+  test test-always-sample;
+  test test-never-sample;
+  test test-if-tracing-sample;
 end suite;
 
 define test test-span-annotations ()
@@ -54,4 +57,22 @@ define test test-span-accumulated-time ()
    assert-false(span.span-accumulated-time, "spans have no accumulated time while running");
 
   // TODO: More testing once setting timestamps is implemented.
+end test;
+
+define test test-always-sample ()
+  assert-true($always-sample());
+end test;
+
+define test test-never-sample ()
+  assert-false($never-sample());
+end test;
+
+define test test-if-tracing-sample ()
+  enable-tracing();
+  assert-true(tracing-enabled?());
+  assert-true($if-tracing-sample());
+
+  disable-tracing();
+  assert-false(tracing-enabled?());
+  assert-false($if-tracing-sample());
 end test;
