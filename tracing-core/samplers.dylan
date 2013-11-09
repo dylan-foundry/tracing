@@ -18,3 +18,7 @@ end function;
 define function disable-tracing ()
   *tracing-enabled* := #f;
 end function;
+
+define function tracing-enabled? () => (well? :: <boolean>)
+  *tracing-enabled*
+end function;
