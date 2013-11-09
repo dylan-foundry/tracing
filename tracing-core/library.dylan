@@ -41,7 +41,9 @@ define module tracing-core
 
   export <span-writer>,
          span-writer-add-span,
-         add-span-writer,
+         register-span-writer,
+         unregister-span-writer,
+         registered-span-writers,
          store-span,
          <memory-span-writer>;
 

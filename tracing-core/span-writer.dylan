@@ -12,8 +12,16 @@ define constant <span-writer-vector> = limited(<vector>, of: <span-writer>);
 
 define variable *span-writers* :: <span-writer-vector> = make(<span-writer-vector>);
 
-define function add-span-writer (span-writer :: <span-writer>) => ()
+define function register-span-writer (span-writer :: <span-writer>) => ()
   *span-writers* := add!(*span-writers*, span-writer);
+end function;
+
+define function unregister-span-writer (span-writer :: <span-writer>) => ()
+  *span-writers* := remove!(*span-writers*, span-writer);
+end function;
+
+define function registered-span-writers () => (span-writers :: <span-writer-vector>)
+  *span-writers*
 end function;
 
 define function store-span (span :: <span>) => ()
