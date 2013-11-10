@@ -99,4 +99,7 @@ define test test-span-writer-storage ()
   span-stop(span);
   assert-equal(1, span-writer.memory-span-storage.size);
   assert-equal("Test", span-writer.memory-span-storage[0].span-description);
+
+  // Don't interfere with subsequent tests.
+  unregister-span-writer(span-writer);
 end test;
