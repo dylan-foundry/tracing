@@ -12,6 +12,7 @@ end library tracing-core;
 define module tracing-core
   use dylan;
   use common-dylan;
+  use finalization;
   use plists;
 
   export <span>,

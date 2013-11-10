@@ -20,6 +20,15 @@ define class <span> (<object>)
   slot span-stop-time :: <timestamp> = 0;
 end class <span>;
 
+define method initialize (span :: <span>, #key)
+  finalize-when-unreachable(span);
+end method initialize;
+
+define method finalize (span :: <span>) => ()
+  span-annotate(span, "Finalizing due to GC.");
+  span-stop(span);
+end method finalize;
+
 define method span-annotate (span :: <span>, description :: <string>)
   let annotation = make(<span-annotation>,
                         description: description,
