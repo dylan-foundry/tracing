@@ -5,23 +5,132 @@ Tracing
 .. current-library:: tracing
 
 This is a tracing library based on the `Dapper`_ work by Google.
+It is also similar to Twitter's `Zipkin`_ and `HTrace`_ from Cloudera
+which were also inspired by the `Dapper`_ work.
+
+Tracing is different from simply recording metrics about a service
+or logging text strings to a log file. Tracing is intended to capture
+information about the units of work that are being performed, how they
+relate to one another, and how long the pieces of the units of work
+take to execute.
+
+Each unit of work at the top level is captured by a trace which consists
+of a tree of spans (:class:`<span>`). Each unit of work is tracked by
+a span in the tree.
+
+Each span can have key/value data associated with it via either
+:func:`trace-add-data` or :func:`span-add-data`. This data typically
+represents data associated with the computation or action. Examples
+might include the user name making a request, the SQL being executed,
+the table being queried, or the IP address associated with a request.
+
+Each span can also have timestamped annotations provided via either
+:func:`trace-annotate` or :func:`span-annotate`. This associates a
+text description of an event with a timestamp and the span. This might
+be used to indicate progress through a task, unusual events, or
+anything interesting.
+
+Other important details are discussed below, such as `Writers`_
+and `Sampling`_.
 
 .. _Dapper: http://research.google.com/pubs/pub36356.html
+.. _Zipkin: http://twitter.github.io/zipkin/
+.. _HTrace: https://github.com/cloudera/htrace/
 
 The TRACING-CORE module
 =======================
 
 .. current-module:: tracing-core
 
-The overall architecture is pretty simple. A trace is a tree of
-:class:`spans <<span>>`, each span representing some part of an overall
-computation, with a root span at the top of the tree that encompasses
-an entire computation.
-
-Spans are written to storage by :gf:`stopping <span-stop>` them.
-
 .. contents::
    :local:
+
+Tracing
+-------
+
+The tracing functions in this section represent the high level
+interface to the tracing library and are what would typically
+be used, rather than the span-specific functions.
+
+There may be times though when using the lower level,
+span-specific functions is appropriate, such as when you have
+multiple units of work executing asynchronously. The asynchronous
+tasks may find it easier to track their own spans separately.
+
+.. function:: trace-push
+
+   :signature: trace-push (description #key sampler) => (span?)
+
+   :parameter description: An instance of :drm:`<string>`.
+   :parameter #key sampler: An instance of :drm:`<function>`.
+   :value span?: An instance of ``false-or(<span>)``.
+
+   :description:
+
+     Create a new :class:`<span>` and make it the current tracing
+     span. If there is already a span, the new span will use the
+     existing span as the parent.
+
+   See also:
+
+   * :func:`trace-pop`
+
+.. function:: trace-add-data
+
+   :signature: trace-add-data (key data) => ()
+
+   :parameter key: An instance of :drm:`<string>`.
+   :parameter data: An instance of :drm:`<string>`.
+
+   :description:
+
+     Adds key / value data to the current trace span (if any),
+     using :gf:`span-add-data`.
+
+   See also:
+
+   * :gf:`span-add-data`
+
+.. function:: trace-annotate
+
+   :signature: trace-annotate (description) => ()
+
+   :parameter description: An instance of :drm:`<string>`.
+
+   :description:
+
+     Adds an annotation to the current trace span (if any), using
+     :gf:`span-annotate`.
+
+   See also:
+
+   * :gf:`span-annotate`
+
+.. function:: trace-pop
+
+   :signature: trace-pop (span?) => ()
+
+   :parameter span?: An instance of ``false-or(<span>)``.
+
+   :description:
+
+     Stops the current span and pops it from the stack, returning
+     the previous span to the current slot.
+
+   See also:
+
+   * :func:`trace-push`
+
+.. macro:: with-tracing
+
+   :macrocall:
+
+     .. code-block:: dylan
+
+       with-tracing ("Span description")
+         trace-add-data("Table", "users");
+         ...
+       end with-tracing
 
 Spans
 -----
@@ -33,6 +142,13 @@ Spans
    :keyword description:
    :keyword parent-id:
    :keyword trace-id:
+
+   :description:
+
+     A span tracks a period of time associated with a computation
+     or action, along with annotations and key / value data. Spans
+     exist within a tree of spans all of which share the same
+     ``trace-id``.
 
 .. generic-function:: span-accumulated-time
 
@@ -154,6 +270,7 @@ Spans
    See also:
 
    * :gf:`span-stopped?`
+   * :func:`store-span`
 
 .. generic-function:: span-stopped?
 
@@ -170,10 +287,17 @@ Spans
 
 .. generic-function:: span-trace-id
 
+   Return the trace-id for a span.
+
    :signature: span-trace-id (span) => (id)
 
    :parameter span: An instance of :class:`<span>`.
    :value id: An instance of ``<object>``.
+
+   :description:
+
+     Returns the trace-id for a span. This ID is the same for all
+     spans within a single trace.
 
 Annotations
 -----------
@@ -281,6 +405,13 @@ and recorded.
 
 Writers
 -------
+
+Spans are stored by using instances of :class:`<span-writer>` which
+have been registered using :func:`register-span-writer`. Spans are
+stored when they are stopped (:func:`trace-pop`, :func:`span-stop`).
+Spans are also stored when they are finalized without having been
+stopped previously. This finalization is only present to prevent
+data from being lost and should not be a default mode of operation.
 
 .. class:: <span-writer>
 
