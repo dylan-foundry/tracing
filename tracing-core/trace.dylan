@@ -55,3 +55,15 @@ define function trace-current-spans () => (spans :: <list>);
   *current-spans*
 end function trace-current-spans;
 
+define macro with-tracing
+  { with-tracing (?description:expression) ?:body end }
+ =>
+  {
+    let span = trace-push(?description);
+    block ()
+      ?body
+    cleanup
+      trace-pop(span);
+    end block;
+  }
+end macro with-tracing;

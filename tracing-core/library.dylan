@@ -19,7 +19,8 @@ define module tracing-core
          trace-add-data,
          trace-annotate,
          trace-pop,
-         trace-current-spans;
+         trace-current-spans,
+         \with-tracing;
 
   export <span>,
          span-id,
