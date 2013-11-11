@@ -106,9 +106,6 @@ define test test-span-writer-storage ()
 end test;
 
 define test test-trace-interface ()
-  let span-writer = make(<memory-span-writer>);
-  register-span-writer(span-writer);
-
   let span? :: false-or(<span>) = #f;
   assert-no-errors(span? := trace-push("Test"));
   assert-true(span?);
@@ -123,6 +120,4 @@ define test test-trace-interface ()
     assert-true(empty?(trace-current-spans()));
     // TODO: assert-true(span-stopped?(span));
   end if;
-
-  unregister-span-writer(span-writer);
 end test;
