@@ -56,7 +56,7 @@ end test;
 define test test-span-accumulated-time ()
   let span = make(<span>, trace-id: get-unique-id(), description: "Test");
 
-   assert-false(span.span-accumulated-time, "spans have no accumulated time while running");
+  assert-false(span.span-accumulated-time, "spans have no accumulated time while running");
 
   // TODO: More testing once setting timestamps is implemented.
 end test;
