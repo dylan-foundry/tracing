@@ -10,7 +10,18 @@ define method trace-push
      #key sampler = $always-sample)
  => (span? :: false-or(<span>))
   if (sampler())
-    let span = make(<span>, description: description);
+    let (trace-id, parent-id)
+      = if (~empty?(*current-spans*))
+          let current-span = *current-spans*.head;
+          values(current-span.span-trace-id,
+                 current-span.span-id)
+        else
+          values(get-unique-id(), #f)
+        end if;
+    let span = make(<span>,
+                    description: description,
+                    trace-id: trace-id,
+                    parent-id: parent-id);
     *current-spans* := add(*current-spans*, span);
     span
   else
