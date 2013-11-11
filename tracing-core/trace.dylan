@@ -6,10 +6,11 @@ Copyright: See LICENSE file in this distribution.
 define thread variable *current-spans* :: <list> = #();
 
 define method trace-push
-    (#key sampler = $always-sample)
+    (description,
+     #key sampler = $always-sample)
  => (span? :: false-or(<span>))
   if (sampler())
-    let span = make(<span>);
+    let span = make(<span>, description: description);
     *current-spans* := add(*current-spans*, span);
     span
   else
