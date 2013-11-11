@@ -14,6 +14,7 @@ define suite tracing-core-test-suite ()
   test test-span-writer-registration;
   test test-span-writer-storage;
   test test-trace-interface;
+  test test-nested-traces;
 end suite;
 
 define test test-span-annotations ()
@@ -120,4 +121,19 @@ define test test-trace-interface ()
     assert-true(empty?(trace-current-spans()));
     // TODO: assert-true(span-stopped?(span));
   end if;
+end test;
+
+define test test-nested-traces ()
+  let outer-span = trace-push("Outer");
+  let inner-span = trace-push("Inner");
+
+  let current-spans = trace-current-spans();
+  assert-equal(2, current-spans.size);
+  assert-equal("Outer", current-spans[1].span-description);
+  assert-equal("Inner", current-spans[0].span-description);
+  assert-equal(outer-span.span-id, inner-span.span-parent-id);
+  assert-equal(outer-span.span-trace-id, inner-span.span-trace-id);
+
+  trace-pop(inner-span);
+  trace-pop(outer-span);
 end test;
