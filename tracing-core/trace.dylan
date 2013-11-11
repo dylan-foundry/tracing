@@ -38,3 +38,8 @@ define function trace-pop (span? :: false-or(<span>)) => ()
     end if;
   end if;
 end function trace-pop;
+
+define function trace-current-spans () => (spans :: <list>);
+  *current-spans*
+end function trace-current-spans;
+

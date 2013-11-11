@@ -18,7 +18,8 @@ define module tracing-core
   export trace-push,
          trace-add-data,
          trace-annotate,
-         trace-pop;
+         trace-pop,
+         trace-current-spans;
 
   export <span>,
          span-id,
