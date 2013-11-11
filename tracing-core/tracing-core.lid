@@ -7,3 +7,4 @@ files: library
        timestamp
        unique-id
        span-writer
+       trace

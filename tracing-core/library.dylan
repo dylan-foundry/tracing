@@ -15,6 +15,11 @@ define module tracing-core
   use finalization;
   use plists;
 
+  export trace-push,
+         trace-add-data,
+         trace-annotate,
+         trace-pop;
+
   export <span>,
          span-id,
          span-trace-id,
