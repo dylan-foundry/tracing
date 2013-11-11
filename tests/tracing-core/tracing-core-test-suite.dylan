@@ -13,6 +13,7 @@ define suite tracing-core-test-suite ()
   test test-if-tracing-sample;
   test test-span-writer-registration;
   test test-span-writer-storage;
+  test test-trace-interface;
 end suite;
 
 define test test-span-annotations ()
@@ -101,5 +102,27 @@ define test test-span-writer-storage ()
   assert-equal("Test", span-writer.memory-span-storage[0].span-description);
 
   // Don't interfere with subsequent tests.
+  unregister-span-writer(span-writer);
+end test;
+
+define test test-trace-interface ()
+  let span-writer = make(<memory-span-writer>);
+  register-span-writer(span-writer);
+
+  let span? :: false-or(<span>) = #f;
+  assert-no-errors(span? := trace-push("Test"));
+  assert-true(span?);
+  if (span?)
+    let span :: <span> = span?;
+    assert-equal(1, trace-current-spans().size);
+    assert-no-errors(trace-add-data("key", "value"));
+    assert-equal(2, span.span-data.size);
+    assert-no-errors(trace-annotate("test annotation"));
+    assert-equal(1, span.span-annotations.size);
+    assert-no-errors(trace-pop(span));
+    assert-true(empty?(trace-current-spans()));
+    // TODO: assert-true(span-stopped?(span));
+  end if;
+
   unregister-span-writer(span-writer);
 end test;
