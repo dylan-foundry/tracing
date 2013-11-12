@@ -52,7 +52,7 @@ define method span-stop (span :: <span>)
   store-span(span);
 end method span-stop;
 
-define method span-stopped? (span :: <span>) => (well? :: <boolean>);
+define method span-stopped? (span :: <span>) => (stopped? :: <boolean>);
   span.span-stop-time ~= 0
 end method span-stopped?;
 

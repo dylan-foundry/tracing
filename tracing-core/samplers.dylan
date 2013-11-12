@@ -9,7 +9,7 @@ define constant $never-sample = always(#f);
 
 define variable *tracing-enabled* = #t;
 
-define constant $if-tracing-sample = method () => (well? :: <boolean>) *tracing-enabled* end;
+define constant $if-tracing-sample = method () => (record-sample? :: <boolean>) *tracing-enabled* end;
 
 define function enable-tracing ()
   *tracing-enabled* := #t;
@@ -19,6 +19,6 @@ define function disable-tracing ()
   *tracing-enabled* := #f;
 end function;
 
-define function tracing-enabled? () => (well? :: <boolean>)
+define function tracing-enabled? () => (enabled? :: <boolean>)
   *tracing-enabled*
 end function;
