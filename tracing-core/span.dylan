@@ -18,9 +18,11 @@ define class <span> (<object>)
   slot span-data :: false-or(<vector>) = #f;
   constant slot span-start-time :: <timestamp> = timestamp-now();
   slot span-stop-time :: <timestamp> = 0;
+  slot span-host :: <string> = "";
 end class <span>;
 
 define method initialize (span :: <span>, #key)
+  span-host(span) := *trace-host*;
   finalize-when-unreachable(span);
 end method initialize;
 

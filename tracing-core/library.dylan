@@ -19,6 +19,7 @@ define module tracing-core
          trace-add-data,
          trace-annotate,
          trace-pop,
+         trace-set-host,
          trace-current-spans,
          \with-tracing;
 
@@ -31,6 +32,7 @@ define module tracing-core
          span-annotate,
          span-data,
          span-add-data,
+         span-host,
          span-stop,
          span-accumulated-time,
          span-stopped?;

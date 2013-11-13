@@ -15,6 +15,7 @@ define suite tracing-core-test-suite ()
   test test-span-writer-storage;
   test test-trace-interface;
   test test-nested-traces;
+  test test-trace-host;
   test test-with-tracing;
 end suite;
 
@@ -138,6 +139,13 @@ define test test-nested-traces ()
   trace-pop(inner-span);
   trace-pop(outer-span);
 end test;
+
+define test test-trace-host ()
+  assert-no-errors(trace-set-host("abc"));
+  let span = make(<span>, trace-id: get-unique-id(), description: "Test");
+  assert-equal("abc", span-host(span));
+end test test-trace-host;
+
 
 define test test-with-tracing ()
   with-tracing ("Outer")

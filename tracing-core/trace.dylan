@@ -4,6 +4,7 @@ Author: Bruce Mitchener, Jr.
 Copyright: See LICENSE file in this distribution.
 
 define thread variable *current-spans* :: <list> = #();
+define variable *trace-host* :: <string> = "";
 
 define method trace-push
     (description,
@@ -54,6 +55,10 @@ end function trace-pop;
 define function trace-current-spans () => (spans :: <list>);
   *current-spans*
 end function trace-current-spans;
+
+define function trace-set-host (host :: <string>) => ();
+  *trace-host* := host;
+end function trace-set-host;
 
 define macro with-tracing
   { with-tracing (?description:expression) ?:body end }

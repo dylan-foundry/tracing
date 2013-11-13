@@ -121,6 +121,32 @@ tasks may find it easier to track their own spans separately.
 
    * :func:`trace-push`
 
+.. function:: trace-set-host
+
+   Sets the global host identifier that will be set on all spans created by this
+   process.
+
+   :signature: trace-set-host (host) => ()
+
+   :parameter host: An instance of :drm:`<string>`.
+
+   :description:
+
+      Sets the global host identifier that will be set on all spans created
+      by this process.
+
+      This may just be a hostname, but if multiple processes are running on
+      the same host, then it should include additional identifying data.
+      Ideally, this identifier will be unique per process within a cluster
+      in a distributed system.
+
+      .. note:: This function should be called early in the application
+         startup, before any tracing is performed.
+
+   See also:
+
+   * :gf:`span-host`
+
 .. macro:: with-tracing
 
    :macrocall:
@@ -241,6 +267,16 @@ Spans
 
    :parameter span: An instance of :class:`<span>`.
    :value description: An instance of :drm:`<string>`.
+
+.. generic-function:: span-host
+
+   Returns the host identifier for the process which
+   created this span.
+
+   :signature: span-host (span) => (host)
+
+   :parameter span: An instance of :class:`<span>`.
+   :value host: An instance of :drm:`<string>`.
 
 .. generic-function:: span-id
 
