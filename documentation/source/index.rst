@@ -276,10 +276,10 @@ Spans
 
    Has the span been stopped yet?
 
-   :signature: span-stopped? (span) => (well?)
+   :signature: span-stopped? (span) => (stopped?)
 
    :parameter span: An instance of :class:`<span>`.
-   :value #rest results: An instance of :drm:`<boolean>`.
+   :value stopped?: An instance of :drm:`<boolean>`.
 
    See also:
 
@@ -337,7 +337,7 @@ Samplers allow for collecting a subset of the data, making the
 usage of this tracing framework in a heavily loaded production
 scenario more realistic.
 
-Samplers are simply a function that returns a boolean value
+Samplers are simply functions that return a boolean value
 indicating whether or not an actual trace should be generated
 and recorded.
 
@@ -348,17 +348,17 @@ and recorded.
 
    Alaways returns true, so that the trace is sampled.
 
-   :signature: $always-sample () => (well?)
+   :signature: $always-sample () => #t
 
-   :value well?: An instance of :drm:`<boolean>`.
+   :value record-sample?: Always ``#t``.
 
 .. function:: $if-tracing-sample
 
    Returns true if tracing is enabled, otherwise ``#f``.
 
-   :signature: $if-tracing-sample () => (well?)
+   :signature: $if-tracing-sample () => (record-sample?)
 
-   :value well?: An instance of :drm:`<boolean>`.
+   :value record-sample?: An instance of :drm:`<boolean>`.
 
    See also:
 
@@ -370,9 +370,9 @@ and recorded.
 
    Always returns false, so that the trace isn't sampled.
 
-   :signature: $never-sample () => (well?)
+   :signature: $never-sample () => #f
 
-   :value well?: An instance of :drm:`<boolean>`.
+   :value record-sample?: Always ``#f``.
 
 .. function:: disable-tracing
 
@@ -394,9 +394,9 @@ and recorded.
 
 .. function:: tracing-enabled?
 
-   :signature: tracing-enabled? () => (well?)
+   :signature: tracing-enabled? () => (enabled?)
 
-   :value well?: An instance of :drm:`<boolean>`.
+   :value enabled?: An instance of :drm:`<boolean>`.
 
    See also:
 
@@ -472,7 +472,7 @@ data from being lost and should not be a default mode of operation.
 Writer Implementation
 ---------------------
 
-To add a new storage, subclass :class:`<span-writer>` and
+To add a new storage class, subclass :class:`<span-writer>` and
 implement the :gf:`span-writer-add-span` method. Then, call
 :func:`register-span-writer` with an instance of your span
 writer and all subsequent spans completed will be written to it.
