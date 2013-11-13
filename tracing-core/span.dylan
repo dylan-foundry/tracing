@@ -25,8 +25,10 @@ define method initialize (span :: <span>, #key)
 end method initialize;
 
 define method finalize (span :: <span>) => ()
-  span-annotate(span, "Finalizing due to GC.");
-  span-stop(span);
+  if (~span-stopped?(span))
+    span-annotate(span, "Finalizing due to GC.");
+    span-stop(span);
+  end if;
 end method finalize;
 
 define method span-annotate (span :: <span>, description :: <string>)
@@ -48,8 +50,10 @@ end method span-add-data;
 
 
 define method span-stop (span :: <span>)
-  span.span-stop-time := timestamp-now();
-  store-span(span);
+  if (~span-stopped?(span))
+    span.span-stop-time := timestamp-now();
+    store-span(span);
+  end if;
 end method span-stop;
 
 define method span-stopped? (span :: <span>) => (stopped? :: <boolean>);
