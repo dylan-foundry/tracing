@@ -14,6 +14,7 @@ define module tracing-core
   use common-dylan;
   use finalization;
   use plists;
+  use simple-random;
 
   export trace-push,
          trace-add-data,

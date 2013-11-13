@@ -135,6 +135,7 @@ define test test-nested-traces ()
   assert-equal("Inner", current-spans[0].span-description);
   assert-equal(outer-span.span-id, inner-span.span-parent-id);
   assert-equal(outer-span.span-trace-id, inner-span.span-trace-id);
+  assert-false(outer-span.span-id == inner-span.span-id);
 
   trace-pop(inner-span);
   trace-pop(outer-span);
