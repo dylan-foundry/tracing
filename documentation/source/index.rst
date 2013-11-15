@@ -37,6 +37,27 @@ and `Sampling`_.
 .. _Zipkin: http://twitter.github.io/zipkin/
 .. _HTrace: https://github.com/cloudera/htrace/
 
+Instrumenting Your Code
+=======================
+
+Instrumenting your code with tracing should be pretty easy.
+
+At application startup, call :func:`trace-set-host` with a
+string identifier that is unique among the machines running
+the software.
+
+To start tracing, either call :func:`trace-push` and
+:func:`trace-pop` or use :macro:`with-tracing`:
+
+.. code-block:: dylan
+
+   with-tracing ("http-request")
+     trace-add-data("client-ip-address", ...);
+     trace-add-data("requested-path", ...);
+
+     ... do work ...
+   end;
+
 The TRACING-CORE module
 =======================
 
