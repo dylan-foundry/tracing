@@ -7,7 +7,7 @@ define suite tracing-core-test-suite ()
   test test-span-annotations;
   test test-span-data;
   test test-span-stopped;
-  test test-span-accumulated-time;
+  test test-span-duration;
   test test-always-sample;
   test test-never-sample;
   test test-if-tracing-sample;
@@ -52,17 +52,20 @@ end test;
 define test test-span-stopped ()
   let span = make(<span>, trace-id: get-unique-id(), description: "Test");
 
-  assert-false(span.span-stopped?, "spans should start out running")
+  assert-false(span.span-stopped?, "spans should start out running");
 
-  // TODO: More testing once setting timestamps is implemented.
+  assert-no-errors(span-stop(span));
+  assert-true(span.span-stopped?);
 end test;
 
-define test test-span-accumulated-time ()
+define test test-span-duration ()
   let span = make(<span>, trace-id: get-unique-id(), description: "Test");
 
-  assert-false(span.span-accumulated-time, "spans have no accumulated time while running");
+  assert-false(span.span-duration, "spans have no duration while running");
 
-  // TODO: More testing once setting timestamps is implemented.
+  assert-no-errors(span-stop(span));
+  let duration = span.span-duration;
+  assert-true((duration.duration-seconds > 0) | (duration.duration-microseconds > 0));
 end test;
 
 define test test-always-sample ()
@@ -121,7 +124,7 @@ define test test-trace-interface ()
     assert-equal(1, span.span-annotations.size);
     assert-no-errors(trace-pop(span));
     assert-true(empty?(trace-current-spans()));
-    // TODO: assert-true(span-stopped?(span));
+    assert-true(span-stopped?(span));
   end if;
 end test;
 

@@ -176,19 +176,6 @@ Spans
      exist within a tree of spans all of which share the same
      ``trace-id``.
 
-.. generic-function:: span-accumulated-time
-
-   :signature: span-accumulated-time (span) => (time?)
-
-   :parameter span: An instance of :class:`<span>`.
-   :value time?: An instance of ``false-or(<duration>)``.
-
-   :description:
-
-     If the span has not yet been stopped, this returns ``#f``. Once
-     the span has been stopped, the duration that the span was running
-     will be returned.
-
 .. generic-function:: span-add-data
 
    :signature: span-add-data (span key data) => ()
@@ -267,6 +254,19 @@ Spans
 
    :parameter span: An instance of :class:`<span>`.
    :value description: An instance of :drm:`<string>`.
+
+.. generic-function:: span-duration
+
+   :signature: span-duration (span) => (time?)
+
+   :parameter span: An instance of :class:`<span>`.
+   :value time?: An instance of ``false-or(<duration>)``.
+
+   :description:
+
+     If the span has not yet been stopped, this returns ``#f``. Once
+     the span has been stopped, the duration that the span was running
+     will be returned.
 
 .. generic-function:: span-host
 

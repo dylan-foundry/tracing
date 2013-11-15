@@ -15,6 +15,7 @@ define module tracing-core
   use finalization;
   use plists;
   use simple-random;
+  use simple-timers;
 
   export trace-push,
          trace-add-data,
@@ -29,13 +30,13 @@ define module tracing-core
          span-trace-id,
          span-parent-id,
          span-description,
+         span-duration,
          span-annotations,
          span-annotate,
          span-data,
          span-add-data,
          span-host,
          span-stop,
-         span-accumulated-time,
          span-stopped?;
 
   export <span-annotation>,
@@ -58,6 +59,10 @@ define module tracing-core
          store-span,
          <memory-span-writer>,
          memory-span-storage;
+
+  export <duration>,
+         duration-seconds,
+         duration-microseconds;
 
   export get-unique-id;
 end module tracing-core;

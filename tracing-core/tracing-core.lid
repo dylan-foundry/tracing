@@ -4,7 +4,7 @@ files: library
        samplers
        span
        span-annotation
-       timestamp
+       duration
        unique-id
        span-writer
        trace

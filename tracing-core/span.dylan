@@ -16,14 +16,15 @@ define class <span> (<object>)
     required-init-keyword: description:;
   slot span-annotations :: false-or(<span-annotation-vector>) = #f;
   slot span-data :: false-or(<vector>) = #f;
-  constant slot span-start-time :: <timestamp> = timestamp-now();
-  slot span-stop-time :: <timestamp> = 0;
+  constant slot span-timer :: <timer> = make(<timer>);
+  slot span-duration :: false-or(<duration>) = #f;
   slot span-host :: <string> = "";
 end class <span>;
 
 define method initialize (span :: <span>, #key)
   span-host(span) := *trace-host*;
   finalize-when-unreachable(span);
+  timer-start(span-timer(span));
 end method initialize;
 
 define method finalize (span :: <span>) => ()
@@ -34,9 +35,11 @@ define method finalize (span :: <span>) => ()
 end method finalize;
 
 define method span-annotate (span :: <span>, description :: <string>)
+  let (s, us) = span.span-timer.timer-accumulated-time;
+  let duration = make(<duration>, seconds: s, microseconds: us);
   let annotation = make(<span-annotation>,
                         description: description,
-                        timestamp: timestamp-now());
+                        timestamp: duration);
   if (~span.span-annotations)
     span.span-annotations := make(<span-annotation-vector>);
   end if;
@@ -53,18 +56,14 @@ end method span-add-data;
 
 define method span-stop (span :: <span>)
   if (~span-stopped?(span))
-    span.span-stop-time := timestamp-now();
+    let (seconds, microseconds) = timer-stop(span.span-timer);
+    span.span-duration := make(<duration>,
+                               seconds: seconds,
+                               microseconds: microseconds);
     store-span(span);
   end if;
 end method span-stop;
 
 define method span-stopped? (span :: <span>) => (stopped? :: <boolean>);
-  span.span-stop-time ~= 0
+  ~span.span-timer.timer-running?
 end method span-stopped?;
-
-
-define method span-accumulated-time (span :: <span>) => (time? :: false-or(<duration>))
-  if (span.span-stopped?)
-    span.span-stop-time - span.span-start-time
-  end if
-end method span-accumulated-time;

@@ -6,6 +6,6 @@ Copyright: See LICENSE file in this distribution.
 define class <span-annotation> (<object>)
   constant slot annotation-description :: <string>,
     required-init-keyword: description:;
-  constant slot annotation-timestamp :: <timestamp>,
+  constant slot annotation-timestamp :: <duration>,
     required-init-keyword: timestamp:;
 end class <span-annotation>;
