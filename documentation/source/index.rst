@@ -268,6 +268,12 @@ Spans
      the span has been stopped, the duration that the span was running
      will be returned.
 
+   See also:
+
+   * :class:`<duration>`
+   * :gf:`duration-microseconds`
+   * :gf:`duration-seconds`
+
 .. generic-function:: span-host
 
    Returns the host identifier for the process which
@@ -525,6 +531,45 @@ writer and all subsequent spans completed will be written to it.
       This method is specialized for each subclass of
       :class:`<span-writer>`. It is called whenever a span
       needs to be processed by a span writer.
+
+Duration
+--------
+
+.. class:: <duration>
+
+   Measure of time elapsed.
+
+   :superclasses: <object>
+
+   :keyword microseconds:
+   :keyword seconds:
+
+   See also:
+
+   * :gf:`duration-microseconds`
+   * :gf:`duration-seconds`
+
+.. generic-function:: duration-microseconds
+
+   :signature: duration-microseconds (duration) => (microseconds)
+
+   :parameter duration: An instance of :class:`<duration>`.
+   :value microseconds: An instance of :drm:`<integer>`.
+
+   See also:
+
+   * :gf:`duration-seconds`
+
+.. generic-function:: duration-seconds
+
+   :signature: duration-seconds (duration) => (seconds)
+
+   :parameter duration: An instance of :class:`<duration>`.
+   :value seconds: An instance of :drm:`<integer>`.
+
+   See also:
+
+   * :gf:`duration-microseconds`
 
 Miscellaneous
 -------------
