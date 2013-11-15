@@ -69,21 +69,21 @@ define test test-span-duration ()
 end test;
 
 define test test-always-sample ()
-  assert-true($always-sample());
+  assert-true(always-sample());
 end test;
 
 define test test-never-sample ()
-  assert-false($never-sample());
+  assert-false(never-sample());
 end test;
 
 define test test-if-tracing-sample ()
   enable-tracing();
   assert-true(tracing-enabled?());
-  assert-true($if-tracing-sample());
+  assert-true(if-tracing-sample());
 
   disable-tracing();
   assert-false(tracing-enabled?());
-  assert-false($if-tracing-sample());
+  assert-false(if-tracing-sample());
 end test;
 
 define test test-span-writer-registration ()

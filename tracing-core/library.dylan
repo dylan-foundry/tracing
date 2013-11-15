@@ -43,9 +43,9 @@ define module tracing-core
          annotation-description,
          annotation-timestamp;
 
-  export $always-sample,
-         $never-sample,
-         $if-tracing-sample;
+  export always-sample,
+         never-sample,
+         if-tracing-sample;
 
   export enable-tracing,
          disable-tracing,

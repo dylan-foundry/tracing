@@ -8,7 +8,7 @@ define variable *trace-host* :: <string> = "";
 
 define method trace-push
     (description,
-     #key sampler = $always-sample)
+     #key sampler = always-sample)
  => (span? :: false-or(<span>))
   if (sampler())
     let (trace-id, parent-id)

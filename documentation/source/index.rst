@@ -407,19 +407,19 @@ and recorded.
 .. note:: In the future, the sampler will take arguments
    to let it make contextual decisions about sampling.
 
-.. function:: $always-sample
+.. function:: always-sample
 
    Alaways returns true, so that the trace is sampled.
 
-   :signature: $always-sample () => #t
+   :signature: always-sample () => #t
 
    :value record-sample?: Always ``#t``.
 
-.. function:: $if-tracing-sample
+.. function:: if-tracing-sample
 
    Returns true if tracing is enabled, otherwise ``#f``.
 
-   :signature: $if-tracing-sample () => (record-sample?)
+   :signature: if-tracing-sample () => (record-sample?)
 
    :value record-sample?: An instance of :drm:`<boolean>`.
 
@@ -429,11 +429,11 @@ and recorded.
    * :func:`enable-tracing`
    * :func:`tracing-enabled?`
 
-.. function:: $never-sample
+.. function:: never-sample
 
    Always returns false, so that the trace isn't sampled.
 
-   :signature: $never-sample () => #f
+   :signature: never-sample () => #f
 
    :value record-sample?: Always ``#f``.
 
