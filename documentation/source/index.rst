@@ -409,7 +409,7 @@ and recorded.
 
 .. function:: always-sample
 
-   Alaways returns true, so that the trace is sampled.
+   Always returns true, so that the trace is sampled.
 
    :signature: always-sample () => #t
 
