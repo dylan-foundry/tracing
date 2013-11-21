@@ -107,6 +107,8 @@ tasks may find it easier to track their own spans separately.
      span. If there is already a span, the new span will use the
      existing span as the parent.
 
+     ``sampler`` defaults to :func:`if-tracing-sample`.
+
    See also:
 
    * :func:`trace-pop`
