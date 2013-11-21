@@ -58,6 +58,21 @@ To start tracing, either call :func:`trace-push` and
      ... do work ...
    end;
 
+Setting up Sampling
+-------------------
+
+It is a good idea to store a sampler with a central
+object in the system being sampled. For a database
+library, this might be each connection object. For
+an HTTP server, it would be the HTTP server object.
+
+Then, this sampler can be passed to each call to
+:func:`trace-push` as well as to other subsystems
+as they're created. For example, an HTTP request
+making a database connection might pass the HTTP
+server's sampler when creating the database
+connection.
+
 The TRACING-CORE module
 =======================
 
