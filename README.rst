@@ -11,5 +11,9 @@ with Twitter's `Zipkin`_.
 
 Documentation can be found at http://opendylan.org/documentation/tracing/
 
+If you want to build the documentation yourself, you will
+need to add ``documentation/sphinx-extensions`` from your
+copy of Open Dylan to your ``PYTHONPATH``.
+
 .. _Dapper: http://research.google.com/pubs/pub36356.html
 .. _Zipkin: https://github.com/twitter/zipkin
