@@ -77,13 +77,13 @@ define test test-never-sample ()
 end test;
 
 define test test-if-tracing-sample ()
-  enable-tracing();
-  assert-true(tracing-enabled?());
-  assert-true(if-tracing-sample());
-
   disable-tracing();
   assert-false(tracing-enabled?());
   assert-false(if-tracing-sample());
+
+  enable-tracing();
+  assert-true(tracing-enabled?());
+  assert-true(if-tracing-sample());
 end test;
 
 define test test-span-writer-registration ()
