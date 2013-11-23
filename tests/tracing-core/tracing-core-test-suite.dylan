@@ -18,6 +18,7 @@ define suite tracing-core-test-suite ()
   test test-nested-traces;
   test test-trace-host;
   test test-with-tracing;
+  test test-add-duration-to-timestamp;
 end suite;
 
 define test test-span-annotations ()
@@ -178,4 +179,12 @@ define test test-with-tracing ()
 
     end with-tracing;
   end with-tracing;
+end test;
+
+define test test-add-duration-to-timestamp ()
+  let timestamp = make(<timestamp>, days: 0, seconds: 86398, microseconds: 500000);
+  let new-timestamp = add-duration-to-timestamp(timestamp, 1, 500000);
+  assert-equal(1, timestamp-days(new-timestamp));
+  assert-equal(0, timestamp-seconds(new-timestamp));
+  assert-equal(0, timestamp-microseconds(new-timestamp));
 end test;

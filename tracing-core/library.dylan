@@ -73,4 +73,7 @@ define module tracing-core
          timestamp-microseconds;
 
   export get-unique-id;
+
+  // For tests
+  export add-duration-to-timestamp;
 end module tracing-core;

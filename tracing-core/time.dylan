@@ -31,11 +31,11 @@ define function add-duration-to-timestamp
   let days = timestamp-days(timestamp);
   let seconds = timestamp-seconds(timestamp) + seconds;
   let microseconds = timestamp-microseconds(timestamp) + microseconds;
-  if (microseconds > 1000000)
+  if (microseconds >= 1000000)
     seconds := seconds + 1;
     microseconds := microseconds - 1000000;
   end if;
-  if (seconds > 86400)
+  if (seconds >= 86400)
     days := days + 1;
     seconds := seconds - 86400;
   end if;
