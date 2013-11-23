@@ -30,6 +30,7 @@ define module tracing-core
          span-trace-id,
          span-parent-id,
          span-description,
+         span-start-time,
          span-duration,
          span-annotations,
          span-annotate,
@@ -63,6 +64,10 @@ define module tracing-core
   export <duration>,
          duration-seconds,
          duration-microseconds;
+
+  export <timestamp>,
+         timestamp-seconds,
+         timestamp-microseconds;
 
   export get-unique-id;
 end module tracing-core;

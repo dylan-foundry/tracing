@@ -16,6 +16,7 @@ define class <span> (<object>)
     required-init-keyword: description:;
   slot span-annotations :: false-or(<span-annotation-vector>) = #f;
   slot span-data :: false-or(<vector>) = #f;
+  slot span-start-time :: <timestamp>;
   constant slot span-timer :: <timer> = make(<timer>);
   slot span-duration :: false-or(<duration>) = #f;
   slot span-host :: <string> = "";
@@ -25,6 +26,9 @@ define method initialize (span :: <span>, #key)
   span-host(span) := *trace-host*;
   finalize-when-unreachable(span);
   timer-start(span-timer(span));
+  let (s, us) = timer-accumulated-time(*trace-timer-since-start*);
+  // Adjust this by *trace-application-start-time* in the future.
+  span-start-time(span) := make(<timestamp>, seconds: s, microseconds: us);
 end method initialize;
 
 define method finalize (span :: <span>) => ()

@@ -308,6 +308,7 @@ Spans
 
    See also:
 
+   * :gf:`span-start-time`
    * :class:`<duration>`
    * :gf:`duration-microseconds`
    * :gf:`duration-seconds`
@@ -337,6 +338,23 @@ Spans
 
    :parameter span: An instance of :class:`<span>`.
    :value id: An instance of ``<object>``.
+
+.. generic-function:: span-start-time
+
+   Returns the time, relative to application startup,
+   that the span was created.
+
+   :signature: span-start-time (span) => (timestamp)
+
+   :parameter span: An instance of :class:`<span>`.
+   :value timestamp: An instance of :class:`<timestamp>`.
+
+   See also:
+
+   * :gf:`span-duration`
+   * :class:`<timestamp>`
+   * :gf:`timestamp-microseconds`
+   * :gf:`timestamp-seconds`
 
 .. generic-function:: span-stop
 
@@ -570,8 +588,8 @@ writer and all subsequent spans completed will be written to it.
       :class:`<span-writer>`. It is called whenever a span
       needs to be processed by a span writer.
 
-Duration
---------
+Time Utilities
+--------------
 
 .. class:: <duration>
 
@@ -608,6 +626,42 @@ Duration
    See also:
 
    * :gf:`duration-microseconds`
+
+.. class:: <timestamp>
+
+   A point in time.
+
+   :superclasses: <object>
+
+   :keyword microseconds:
+   :keyword seconds:
+
+   See also:
+
+   * :gf:`timestamp-microseconds`
+   * :gf:`timestamp-seconds`
+
+.. generic-function:: timestamp-microseconds
+
+   :signature: timestamp-microseconds (timestamp) => (microseconds)
+
+   :parameter timestamp: An instance of :class:`<timestamp>`.
+   :value microseconds: An instance of :drm:`<integer>`.
+
+   See also:
+
+   * :gf:`timestamp-seconds`
+
+.. generic-function:: timestamp-seconds
+
+   :signature: timestamp-seconds (timestamp) => (seconds)
+
+   :parameter timestamp: An instance of :class:`<timestamp>`.
+   :value seconds: An instance of :drm:`<integer>`.
+
+   See also:
+
+   * :gf:`timestamp-microseconds`
 
 Miscellaneous
 -------------
