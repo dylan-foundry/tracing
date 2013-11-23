@@ -84,6 +84,9 @@ define test test-if-tracing-sample ()
   enable-tracing();
   assert-true(tracing-enabled?());
   assert-true(if-tracing-sample());
+
+  // Make sure we leave it enabled here for future tests
+  // since the default sampler is ``if-tracing-sample``.
 end test;
 
 define test test-span-writer-registration ()
