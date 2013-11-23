@@ -14,6 +14,7 @@ define suite tracing-core-test-suite ()
   test test-span-writer-registration;
   test test-span-writer-storage;
   test test-trace-interface;
+  test test-trace-interface-never-sampling;
   test test-nested-traces;
   test test-trace-host;
   test test-with-tracing;
@@ -129,6 +130,12 @@ define test test-trace-interface ()
     assert-true(empty?(trace-current-spans()));
     assert-true(span-stopped?(span));
   end if;
+end test;
+
+define test test-trace-interface-never-sampling ()
+  let span? :: false-or(<span>) = #f;
+  assert-no-errors(span? := trace-push("Test", sampler: never-sample));
+  assert-false(span?);
 end test;
 
 define test test-nested-traces ()
