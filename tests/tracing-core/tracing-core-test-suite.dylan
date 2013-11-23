@@ -18,6 +18,7 @@ define suite tracing-core-test-suite ()
   test test-nested-traces;
   test test-trace-host;
   test test-with-tracing;
+  test test-with-tracing-never-sampling;
   test test-add-duration-to-timestamp;
 end suite;
 
@@ -178,6 +179,12 @@ define test test-with-tracing ()
       assert-equal("Inner", inner-span.span-annotations[0].annotation-description);
 
     end with-tracing;
+  end with-tracing;
+end test;
+
+define test test-with-tracing-never-sampling ()
+  with-tracing ("Outer", sampler: never-sample)
+    assert-equal(0, trace-current-spans().size);
   end with-tracing;
 end test;
 

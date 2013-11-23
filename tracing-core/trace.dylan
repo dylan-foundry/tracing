@@ -63,10 +63,10 @@ define function trace-set-host (host :: <string>) => ();
 end function trace-set-host;
 
 define macro with-tracing
-  { with-tracing (?description:expression) ?:body end }
+  { with-tracing (?description:expression, #rest ?keys:expression) ?:body end }
  =>
   {
-    let span = trace-push(?description);
+    let span = trace-push(?description, ?keys);
     block ()
       ?body
     cleanup

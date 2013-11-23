@@ -194,7 +194,18 @@ tasks may find it easier to track their own spans separately.
        with-tracing ("Span description")
          trace-add-data("Table", "users");
          ...
-       end with-tracing
+       end with-tracing;
+
+    :description:
+
+      The ``with-tracing`` macro can also take any keywords that :gf:`trace-push`
+      takes and will pass them along:
+
+      .. code-block:: dylan
+
+         with-tracing ("Span description", sampler: never-sample)
+           ...
+         end with-tracing;
 
 Spans
 -----
