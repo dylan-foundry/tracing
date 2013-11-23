@@ -27,8 +27,7 @@ define method initialize (span :: <span>, #key)
   finalize-when-unreachable(span);
   timer-start(span-timer(span));
   let (s, us) = timer-accumulated-time(*trace-timer-since-start*);
-  // Adjust this by *trace-application-start-time* in the future.
-  span-start-time(span) := make(<timestamp>, seconds: s, microseconds: us);
+  span-start-time(span) := add-duration-to-timestamp(*trace-application-start-time*, s, us);
 end method initialize;
 
 define method finalize (span :: <span>) => ()

@@ -341,18 +341,21 @@ Spans
 
 .. generic-function:: span-start-time
 
-   Returns the time, relative to application startup,
-   that the span was created.
+   Returns the time that the span was created.
 
    :signature: span-start-time (span) => (timestamp)
 
    :parameter span: An instance of :class:`<span>`.
    :value timestamp: An instance of :class:`<timestamp>`.
 
+   Like other time values in Dylan, this is the time since
+   January 1, 1900.
+
    See also:
 
    * :gf:`span-duration`
    * :class:`<timestamp>`
+   * :gf:`timestamp-days`
    * :gf:`timestamp-microseconds`
    * :gf:`timestamp-seconds`
 
@@ -638,6 +641,19 @@ Time Utilities
 
    See also:
 
+   * :gf:`timestamp-days`
+   * :gf:`timestamp-microseconds`
+   * :gf:`timestamp-seconds`
+
+.. generic-function:: timestamp-days
+
+   :signature: timestamp-days (timestamp) => (days)
+
+   :parameter timestamp: An instance of :class:`<timestamp>`.
+   :value days: An instance of :drm:`<integer>`.
+
+   See also:
+
    * :gf:`timestamp-microseconds`
    * :gf:`timestamp-seconds`
 
@@ -650,6 +666,7 @@ Time Utilities
 
    See also:
 
+   * :gf:`timestamp-days`
    * :gf:`timestamp-seconds`
 
 .. generic-function:: timestamp-seconds
@@ -661,6 +678,7 @@ Time Utilities
 
    See also:
 
+   * :gf:`timestamp-days`
    * :gf:`timestamp-microseconds`
 
 Miscellaneous

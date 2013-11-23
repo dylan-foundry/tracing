@@ -5,6 +5,7 @@ copyright: See LICENSE file in this distribution.
 define library tracing-core
   use common-dylan;
   use collections;
+  use system;
 
   export tracing-core;
 end library tracing-core;
@@ -12,6 +13,7 @@ end library tracing-core;
 define module tracing-core
   use dylan;
   use common-dylan;
+  use date, import: { current-timestamp };
   use finalization;
   use plists;
   use simple-random;
@@ -66,6 +68,7 @@ define module tracing-core
          duration-microseconds;
 
   export <timestamp>,
+         timestamp-days,
          timestamp-seconds,
          timestamp-microseconds;
 

@@ -6,8 +6,7 @@ Copyright: See LICENSE file in this distribution.
 define thread variable *current-spans* :: <list> = #();
 define variable *trace-host* :: <string> = "";
 define variable *trace-timer-since-start* = make(<timer>);
-// TODO: Fix this.
-define variable *trace-application-start-time* = 0;
+define variable *trace-application-start-time* = get-current-timestamp();
 
 define method trace-push
     (description,
@@ -78,5 +77,4 @@ end macro with-tracing;
 
 begin
   timer-start(*trace-timer-since-start*);
-  // TODO: Set the *trace-application-start-time* here.
 end;
