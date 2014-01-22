@@ -187,7 +187,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'TracingUserGuide.tex', u'Testworks User Guide',
+  ('index', 'TracingUserGuide.tex', u'Tracing User Guide',
    u'Bruce Mitchener, Jr.', 'manual'),
 ]
 
@@ -231,7 +231,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'TracingUserGuide', u'Testworks User Guide',
+  ('index', 'TracingUserGuide', u'Tracing User Guide',
    u'Bruce Mitchener, Jr.', 'TracingUserGuide', 'One line description of project.',
    'Miscellaneous'),
 ]
