@@ -17,7 +17,7 @@ define class <span> (<object>)
   slot span-annotations :: false-or(<span-annotation-vector>) = #f;
   slot span-data :: false-or(<vector>) = #f;
   slot span-start-time :: <timestamp>;
-  constant slot span-timer :: <timer> = make(<timer>);
+  constant slot span-timer :: <profiling-timer> = make(<profiling-timer>);
   slot span-duration :: false-or(<duration>) = #f;
   slot span-host :: <string> = "";
 end class <span>;

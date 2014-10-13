@@ -5,7 +5,7 @@ Copyright: See LICENSE file in this distribution.
 
 define thread variable *current-spans* :: <list> = #();
 define variable *trace-host* :: <string> = "";
-define variable *trace-timer-since-start* = make(<timer>);
+define variable *trace-timer-since-start* = make(<profiling-timer>);
 define variable *trace-application-start-time* = get-current-timestamp();
 
 define method trace-push
