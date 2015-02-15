@@ -3,25 +3,6 @@ synopsis: Test suite for the tracing-core library.
 author: Bruce Mitchener, Jr.
 copyright: See LICENSE file in this distribution.
 
-define suite tracing-core-test-suite ()
-  test test-span-annotations;
-  test test-span-data;
-  test test-span-stopped;
-  test test-span-duration;
-  test test-always-sample;
-  test test-never-sample;
-  test test-if-tracing-sample;
-  test test-span-writer-registration;
-  test test-span-writer-storage;
-  test test-trace-interface;
-  test test-trace-interface-never-sampling;
-  test test-nested-traces;
-  test test-trace-host;
-  test test-with-tracing;
-  test test-with-tracing-never-sampling;
-  test test-add-duration-to-timestamp;
-end suite;
-
 define test test-span-annotations ()
   let span = make(<span>, trace-id: get-unique-id(), description: "Test");
 
@@ -195,3 +176,22 @@ define test test-add-duration-to-timestamp ()
   assert-equal(0, timestamp-seconds(new-timestamp));
   assert-equal(0, timestamp-microseconds(new-timestamp));
 end test;
+
+define suite tracing-core-test-suite ()
+  test test-span-annotations;
+  test test-span-data;
+  test test-span-stopped;
+  test test-span-duration;
+  test test-always-sample;
+  test test-never-sample;
+  test test-if-tracing-sample;
+  test test-span-writer-registration;
+  test test-span-writer-storage;
+  test test-trace-interface;
+  test test-trace-interface-never-sampling;
+  test test-nested-traces;
+  test test-trace-host;
+  test test-with-tracing;
+  test test-with-tracing-never-sampling;
+  test test-add-duration-to-timestamp;
+end suite;
