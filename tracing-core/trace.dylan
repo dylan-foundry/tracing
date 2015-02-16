@@ -8,28 +8,22 @@ define variable *trace-host* :: <string> = "";
 define variable *trace-timer-since-start* = make(<profiling-timer>);
 define variable *trace-application-start-time* = get-current-timestamp();
 
-define method trace-push
-    (description,
-     #key sampler = if-tracing-sample)
+define method trace-push (description :: <string>)
  => (span? :: false-or(<span>))
-  if (sampler())
-    let (trace-id, parent-id)
-      = if (~empty?(*current-spans*))
-          let current-span = *current-spans*.head;
-          values(current-span.span-trace-id,
-                 current-span.span-id)
-        else
-          values(get-unique-id(), #f)
-        end if;
-    let span = make(<span>,
-                    description: description,
-                    trace-id: trace-id,
-                    parent-id: parent-id);
-    *current-spans* := add(*current-spans*, span);
-    span
-  else
-    #f
-  end if;
+  let (trace-id, parent-id)
+    = if (~empty?(*current-spans*))
+        let current-span = *current-spans*.head;
+        values(current-span.span-trace-id,
+               current-span.span-id)
+      else
+        values(get-unique-id(), #f)
+      end if;
+  let span = make(<span>,
+                  description: description,
+                  trace-id: trace-id,
+                  parent-id: parent-id);
+  *current-spans* := add(*current-spans*, span);
+  span
 end method trace-push;
 
 define function trace-add-data (key :: <string>, value :: <string>) => ()

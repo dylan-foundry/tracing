@@ -61,17 +61,10 @@ To start tracing, either call :func:`trace-push` and
 Setting up Sampling
 -------------------
 
-It is a good idea to store a sampler with a central
-object in the system being sampled. For a database
-library, this might be each connection object. For
-an HTTP server, it would be the HTTP server object.
-
-Then, this sampler can be passed to each call to
-:func:`trace-push` as well as to other subsystems
-as they're created. For example, an HTTP request
-making a database connection might pass the HTTP
-server's sampler when creating the database
-connection.
+Sampling of traces is left up to the application. A few
+basic primitives are supplied in :func:`always-sample`,
+:func:`never-sample`, :func:`if-tracing-sample`, and
+related functions. See `Sampling`_ for more information.
 
 The TRACING-CORE module
 =======================
@@ -451,10 +444,10 @@ scenario more realistic.
 
 Samplers are simply functions that return a boolean value
 indicating whether or not an actual trace should be generated
-and recorded.
-
-.. note:: In the future, the sampler will take arguments
-   to let it make contextual decisions about sampling.
+and recorded. They should be called at the appropriate point
+within the application being traced. Some applications may
+wish to limit which traces or parts of traces are collected
+in ways that are not readily representable within this framework.
 
 .. function:: always-sample
 
@@ -476,7 +469,6 @@ and recorded.
 
    * :func:`disable-tracing`
    * :func:`enable-tracing`
-   * :func:`tracing-enabled?`
 
 .. function:: never-sample
 
@@ -490,30 +482,27 @@ and recorded.
 
    :signature: disable-tracing () => ()
 
+   :description:
+
+     This function only modifies the return value of :func:`if-tracing-sample`
+     and does not globally disable tracing.
+
    See also:
 
    * :func:`enable-tracing`
-   * :func:`tracing-enabled?`
 
 .. function:: enable-tracing
 
    :signature: enable-tracing () => ()
 
-   See also:
+   :description:
 
-   * :func:`disable-tracing`
-   * :func:`tracing-enabled?`
-
-.. function:: tracing-enabled?
-
-   :signature: tracing-enabled? () => (enabled?)
-
-   :value enabled?: An instance of :drm:`<boolean>`.
+     This function only modifies the return value of :func:`if-tracing-sample`
+     and does not globally enable tracing.
 
    See also:
 
    * :func:`disable-tracing`
-   * :func:`enable-tracing`
 
 Writers
 -------

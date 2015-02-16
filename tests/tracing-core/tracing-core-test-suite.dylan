@@ -62,15 +62,10 @@ end test;
 
 define test test-if-tracing-sample ()
   disable-tracing();
-  assert-false(tracing-enabled?());
   assert-false(if-tracing-sample());
 
   enable-tracing();
-  assert-true(tracing-enabled?());
   assert-true(if-tracing-sample());
-
-  // Make sure we leave it enabled here for future tests
-  // since the default sampler is ``if-tracing-sample``.
 end test;
 
 define test test-span-writer-registration ()
@@ -115,12 +110,6 @@ define test test-trace-interface ()
   end if;
 end test;
 
-define test test-trace-interface-never-sampling ()
-  let span? :: false-or(<span>) = #f;
-  assert-no-errors(span? := trace-push("Test", sampler: never-sample));
-  assert-false(span?);
-end test;
-
 define test test-nested-traces ()
   let outer-span = trace-push("Outer");
   let inner-span = trace-push("Inner");
@@ -163,12 +152,6 @@ define test test-with-tracing ()
   end with-tracing;
 end test;
 
-define test test-with-tracing-never-sampling ()
-  with-tracing ("Outer", sampler: never-sample)
-    assert-equal(0, trace-current-spans().size);
-  end with-tracing;
-end test;
-
 define test test-add-duration-to-timestamp ()
   let timestamp = make(<timestamp>, days: 0, seconds: 86398, microseconds: 500000);
   let new-timestamp = add-duration-to-timestamp(timestamp, 1, 500000);
@@ -188,10 +171,8 @@ define suite tracing-core-test-suite ()
   test test-span-writer-registration;
   test test-span-writer-storage;
   test test-trace-interface;
-  test test-trace-interface-never-sampling;
   test test-nested-traces;
   test test-trace-host;
   test test-with-tracing;
-  test test-with-tracing-never-sampling;
   test test-add-duration-to-timestamp;
 end suite;

@@ -51,8 +51,7 @@ define module tracing-core
          if-tracing-sample;
 
   export enable-tracing,
-         disable-tracing,
-         tracing-enabled?;
+         disable-tracing;
 
   export <span-writer>,
          span-writer-add-span,
