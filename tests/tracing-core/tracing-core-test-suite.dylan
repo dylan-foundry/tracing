@@ -135,18 +135,20 @@ end test test-trace-host;
 
 define test test-with-tracing ()
   with-tracing ("Outer")
-    trace-annotate("Outer");
+    trace-annotate("Outer annotation");
     with-tracing ("Inner")
-      trace-annotate("Inner");
+      trace-annotate("Inner annotation");
 
       let current-spans = trace-current-spans();
       assert-equal(2, current-spans.size);
       let outer-span = current-spans[1];
       let inner-span = current-spans[0];
+      assert-equal("Outer", outer-span.span-description);
+      assert-equal("Inner", inner-span.span-description);
       assert-equal(1, outer-span.span-annotations.size);
       assert-equal(1, inner-span.span-annotations.size);
-      assert-equal("Outer", outer-span.span-annotations[0].annotation-description);
-      assert-equal("Inner", inner-span.span-annotations[0].annotation-description);
+      assert-equal("Outer annotation", outer-span.span-annotations[0].annotation-description);
+      assert-equal("Inner annotation", inner-span.span-annotations[0].annotation-description);
 
     end with-tracing;
   end with-tracing;
