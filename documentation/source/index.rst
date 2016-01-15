@@ -681,6 +681,25 @@ Time Utilities
    * :gf:`timestamp-days`
    * :gf:`timestamp-microseconds`
 
+Tags
+----
+
+These constants are available to help standardize tracing across
+applications.
+
+.. constant:: $tag/peer/host-name
+
+.. constant:: $tag/peer/ip
+
+.. constant:: $tag/peer/port
+
+.. constant:: $tag/http/uri
+
+.. constant:: $tag/http/response/size
+
+.. constant:: $tag/http/status
+
+
 Miscellaneous
 -------------
 

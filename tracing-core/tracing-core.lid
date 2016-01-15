@@ -8,3 +8,4 @@ files: library
        unique-id
        span-writer
        trace
+       tags

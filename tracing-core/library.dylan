@@ -73,6 +73,13 @@ define module tracing-core
 
   export get-unique-id;
 
+  export $tag/peer/host-name,
+         $tag/peer/ip,
+         $tag/peer/port,
+         $tag/http/uri,
+         $tag/http/response/size,
+         $tag/http/status;
+
   // For tests
   export add-duration-to-timestamp;
 end module tracing-core;
