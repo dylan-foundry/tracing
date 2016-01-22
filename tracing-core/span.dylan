@@ -12,6 +12,8 @@ define class <span> (<object>)
     required-init-keyword: trace-id:;
   constant slot span-parent-id :: false-or(<unique-id>) = #f,
     init-keyword: parent-id:;
+  constant slot span-process-id :: <integer> = current-process-id();
+  constant slot span-thread-id :: <integer> = current-thread-id();
   constant slot span-description :: <string>,
     required-init-keyword: description:;
   slot span-annotations :: false-or(<span-annotation-vector>) = #f;

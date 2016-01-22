@@ -343,6 +343,13 @@ Spans
    :parameter span: An instance of :class:`<span>`.
    :value id: An instance of ``<object>``.
 
+.. generic-function:: span-process-id
+
+   :signature: span-process-id (span) => (process-id)
+
+   :parameter span: An instance of :class:`<span>`.
+   :value process-id: An instance of :drm:`<integer>`.
+
 .. generic-function:: span-start-time
 
    Returns the time that the span was created.
@@ -389,6 +396,13 @@ Spans
    See also:
 
    * :gf:`span-stop`
+
+.. generic-function:: span-thread-id
+
+   :signature: span-thread-id (span) => (thread-id)
+
+   :parameter span: An instance of :class:`<span>`.
+   :value thread-id: An instance of :drm:`<integer>`.
 
 .. generic-function:: span-trace-id
 

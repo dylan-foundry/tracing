@@ -14,10 +14,12 @@ define module tracing-core
   use dylan;
   use common-dylan;
   use date, import: { current-timestamp };
+  use operating-system, import: { current-process-id };
   use finalization;
   use plists;
   use simple-random;
   use simple-timers;
+  use threads;
 
   export trace-push,
          trace-add-data,
@@ -31,6 +33,8 @@ define module tracing-core
          span-id,
          span-trace-id,
          span-parent-id,
+         span-process-id,
+         span-thread-id,
          span-description,
          span-start-time,
          span-duration,
