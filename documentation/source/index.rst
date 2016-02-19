@@ -102,9 +102,9 @@ tasks may find it easier to track their own spans separately.
 
      ``sampler`` defaults to :func:`if-tracing-sample`.
 
-   See also:
+   :seealso:
 
-   * :func:`trace-pop`
+     * :func:`trace-pop`
 
 .. function:: trace-add-data
 
@@ -118,9 +118,9 @@ tasks may find it easier to track their own spans separately.
      Adds key / value data to the current trace span (if any),
      using :gf:`span-add-data`.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-add-data`
+     * :gf:`span-add-data`
 
 .. function:: trace-annotate
 
@@ -133,9 +133,9 @@ tasks may find it easier to track their own spans separately.
      Adds an annotation to the current trace span (if any), using
      :gf:`span-annotate`.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-annotate`
+     * :gf:`span-annotate`
 
 .. function:: trace-pop
 
@@ -148,9 +148,9 @@ tasks may find it easier to track their own spans separately.
      Stops the current span and pops it from the stack, returning
      the previous span to the current slot.
 
-   See also:
+   :seealso:
 
-   * :func:`trace-push`
+     * :func:`trace-push`
 
 .. function:: trace-set-host
 
@@ -174,9 +174,9 @@ tasks may find it easier to track their own spans separately.
       .. note:: This function should be called early in the application
          startup, before any tracing is performed.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-host`
+     * :gf:`span-host`
 
 .. macro:: with-tracing
 
@@ -233,9 +233,9 @@ Spans
       or host information or whatever is relevant to the application
       being traced.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-data`
+     * :gf:`span-data`
 
 .. generic-function:: span-annotate
 
@@ -251,12 +251,12 @@ Spans
       with them that is automatically set to the time when
       the annotation is created.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-annotations`
-   * :class:`<span-annotation>`
-   * :gf:`annotation-description`
-   * :gf:`annotation-timestamp`
+     * :gf:`span-annotations`
+     * :class:`<span-annotation>`
+     * :gf:`annotation-description`
+     * :gf:`annotation-timestamp`
 
 .. generic-function:: span-annotations
 
@@ -268,12 +268,12 @@ Spans
    :parameter span: An instance of :class:`<span>`.
    :value annotations: An instance of :drm:`<vector>`.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-annotate`
-   * :class:`<span-annotation>`
-   * :gf:`annotation-description`
-   * :gf:`annotation-timestamp`
+     * :gf:`span-annotate`
+     * :class:`<span-annotation>`
+     * :gf:`annotation-description`
+     * :gf:`annotation-timestamp`
 
 .. generic-function:: span-data
 
@@ -284,9 +284,9 @@ Spans
    :parameter span: An instance of :class:`<span>`.
    :value data: An instance of :drm:`<vector>`.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-add-data`
+     * :gf:`span-add-data`
 
 .. generic-function:: span-description
 
@@ -310,12 +310,12 @@ Spans
      the span has been stopped, the duration that the span was running
      will be returned.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-start-time`
-   * :class:`<duration>`
-   * :gf:`duration-microseconds`
-   * :gf:`duration-seconds`
+     * :gf:`span-start-time`
+     * :class:`<duration>`
+     * :gf:`duration-microseconds`
+     * :gf:`duration-seconds`
 
 .. generic-function:: span-host
 
@@ -362,13 +362,13 @@ Spans
    Like other time values in Dylan, this is the time since
    January 1, 1900.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-duration`
-   * :class:`<timestamp>`
-   * :gf:`timestamp-days`
-   * :gf:`timestamp-microseconds`
-   * :gf:`timestamp-seconds`
+     * :gf:`span-duration`
+     * :class:`<timestamp>`
+     * :gf:`timestamp-days`
+     * :gf:`timestamp-microseconds`
+     * :gf:`timestamp-seconds`
 
 .. generic-function:: span-stop
 
@@ -379,10 +379,10 @@ Spans
 
    :parameter span: An instance of :class:`<span>`.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-stopped?`
-   * :func:`store-span`
+     * :gf:`span-stopped?`
+     * :func:`store-span`
 
 .. generic-function:: span-stopped?
 
@@ -393,9 +393,9 @@ Spans
    :parameter span: An instance of :class:`<span>`.
    :value stopped?: An instance of :drm:`<boolean>`.
 
-   See also:
+   :seealso:
 
-   * :gf:`span-stop`
+     * :gf:`span-stop`
 
 .. generic-function:: span-thread-id
 
@@ -479,10 +479,10 @@ in ways that are not readily representable within this framework.
 
    :value record-sample?: An instance of :drm:`<boolean>`.
 
-   See also:
+   :seealso:
 
-   * :func:`disable-tracing`
-   * :func:`enable-tracing`
+     * :func:`disable-tracing`
+     * :func:`enable-tracing`
 
 .. function:: never-sample
 
@@ -501,9 +501,9 @@ in ways that are not readily representable within this framework.
      This function only modifies the return value of :func:`if-tracing-sample`
      and does not globally disable tracing.
 
-   See also:
+   :seealso:
 
-   * :func:`enable-tracing`
+     * :func:`enable-tracing`
 
 .. function:: enable-tracing
 
@@ -514,9 +514,9 @@ in ways that are not readily representable within this framework.
      This function only modifies the return value of :func:`if-tracing-sample`
      and does not globally enable tracing.
 
-   See also:
+   :seealso:
 
-   * :func:`disable-tracing`
+     * :func:`disable-tracing`
 
 Writers
 -------
@@ -532,11 +532,11 @@ data from being lost and should not be a default mode of operation.
 
    :superclasses: <object>
 
-   See also:
+   :seealso:
 
-   * :func:`register-span-writer`
-   * :func:`registered-span-writers`
-   * :func:`unregister-span-writer`
+     * :func:`register-span-writer`
+     * :func:`registered-span-writers`
+     * :func:`unregister-span-writer`
 
 .. function:: register-span-writer
 
@@ -544,11 +544,11 @@ data from being lost and should not be a default mode of operation.
 
    :parameter span-writer: An instance of :class:`<span-writer>`.
 
-   See also:
+   :seealso:
 
-   * :class:`<span-writer>`
-   * :func:`registered-span-writers`
-   * :func:`unregister-span-writer`
+     * :class:`<span-writer>`
+     * :func:`registered-span-writers`
+     * :func:`unregister-span-writer`
 
 .. function:: registered-span-writers
 
@@ -556,11 +556,11 @@ data from being lost and should not be a default mode of operation.
 
    :value span-writers: An instance of ``<span-writer-vector>``.
 
-   See also:
+   :seealso:
 
-   * :class:`<span-writer>`
-   * :func:`register-span-writer`
-   * :func:`unregister-span-writer`
+     * :class:`<span-writer>`
+     * :func:`register-span-writer`
+     * :func:`unregister-span-writer`
 
 .. function:: store-span
 
@@ -568,9 +568,9 @@ data from being lost and should not be a default mode of operation.
 
    :parameter span: An instance of :class:`<span>`.
 
-   See also:
+   :seealso:
 
-   * :func:`registered-span-writers`
+     * :func:`registered-span-writers`
 
 .. function:: unregister-span-writer
 
@@ -578,11 +578,11 @@ data from being lost and should not be a default mode of operation.
 
    :parameter span-writer: An instance of :class:`<span-writer>`.
 
-   See also:
+   :seealso:
 
-   * :class:`<span-writer>`
-   * :func:`register-span-writer`
-   * :func:`registered-span-writers`
+     * :class:`<span-writer>`
+     * :func:`register-span-writer`
+     * :func:`registered-span-writers`
 
 Writer Implementation
 ---------------------
@@ -617,10 +617,10 @@ Time Utilities
    :keyword microseconds:
    :keyword seconds:
 
-   See also:
+   :seealso:
 
-   * :gf:`duration-microseconds`
-   * :gf:`duration-seconds`
+     * :gf:`duration-microseconds`
+     * :gf:`duration-seconds`
 
 .. generic-function:: duration-microseconds
 
@@ -629,9 +629,9 @@ Time Utilities
    :parameter duration: An instance of :class:`<duration>`.
    :value microseconds: An instance of :drm:`<integer>`.
 
-   See also:
+   :seealso:
 
-   * :gf:`duration-seconds`
+     * :gf:`duration-seconds`
 
 .. generic-function:: duration-seconds
 
@@ -640,9 +640,9 @@ Time Utilities
    :parameter duration: An instance of :class:`<duration>`.
    :value seconds: An instance of :drm:`<integer>`.
 
-   See also:
+   :seealso:
 
-   * :gf:`duration-microseconds`
+     * :gf:`duration-microseconds`
 
 .. class:: <timestamp>
 
@@ -653,11 +653,11 @@ Time Utilities
    :keyword microseconds:
    :keyword seconds:
 
-   See also:
+   :seealso:
 
-   * :gf:`timestamp-days`
-   * :gf:`timestamp-microseconds`
-   * :gf:`timestamp-seconds`
+     * :gf:`timestamp-days`
+     * :gf:`timestamp-microseconds`
+     * :gf:`timestamp-seconds`
 
 .. generic-function:: timestamp-days
 
@@ -666,10 +666,10 @@ Time Utilities
    :parameter timestamp: An instance of :class:`<timestamp>`.
    :value days: An instance of :drm:`<integer>`.
 
-   See also:
+   :seealso:
 
-   * :gf:`timestamp-microseconds`
-   * :gf:`timestamp-seconds`
+     * :gf:`timestamp-microseconds`
+     * :gf:`timestamp-seconds`
 
 .. generic-function:: timestamp-microseconds
 
@@ -678,10 +678,10 @@ Time Utilities
    :parameter timestamp: An instance of :class:`<timestamp>`.
    :value microseconds: An instance of :drm:`<integer>`.
 
-   See also:
+   :seealso:
 
-   * :gf:`timestamp-days`
-   * :gf:`timestamp-seconds`
+     * :gf:`timestamp-days`
+     * :gf:`timestamp-seconds`
 
 .. generic-function:: timestamp-seconds
 
@@ -690,10 +690,10 @@ Time Utilities
    :parameter timestamp: An instance of :class:`<timestamp>`.
    :value seconds: An instance of :drm:`<integer>`.
 
-   See also:
+   :seealso:
 
-   * :gf:`timestamp-days`
-   * :gf:`timestamp-microseconds`
+     * :gf:`timestamp-days`
+     * :gf:`timestamp-microseconds`
 
 Tags
 ----
