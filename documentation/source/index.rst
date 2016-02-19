@@ -193,11 +193,11 @@ tasks may find it easier to track their own spans separately.
          ...
        end with-tracing;
 
-    :description:
+   :description:
 
-      The ``with-tracing`` macro simplifies the process of calling :gf:`trace-push`
-      and :gf:`trace-pop`. It can also take any keywords that :gf:`trace-push`
-      takes and will pass them along.
+     The ``with-tracing`` macro simplifies the process of calling :gf:`trace-push`
+     and :gf:`trace-pop`. It can also take any keywords that :gf:`trace-push`
+     takes and will pass them along.
 
 
 Spans
