@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Tracing User Guide'
-copyright = u'2013, Bruce Mitchener, Jr.'
+copyright = u'2013-2016, Bruce Mitchener, Jr.'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -252,7 +252,7 @@ texinfo_documents = [
 epub_title = u'Tracing User Guide'
 epub_author = u'Bruce Mitchener, Jr.'
 epub_publisher = u'Bruce Mitchener, Jr.'
-epub_copyright = u'2013, Bruce Mitchener, Jr.'
+epub_copyright = u'2013-2016, Bruce Mitchener, Jr.'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
