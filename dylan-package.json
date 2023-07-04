@@ -1,0 +1,10 @@
+{
+    "name": "tracing",
+    "url": "https://github.com/dylan-foundry/tracing",
+    "description": "A tracing library based on the Dapper work by Google.",
+    "version": "0.1.0",
+    "dependencies": [],
+    "dev-dependencies": [
+        "testworks"
+    ]
+}
